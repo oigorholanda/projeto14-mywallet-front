@@ -10,8 +10,9 @@ export default function Home() {
     <ConteinerHome>
       <Title>
         Olá, Fulano
-        <Link to="/"><RiLogoutBoxRLine size={25} /></Link>
-        
+        <Link to="/">
+          <RiLogoutBoxRLine size={25} />
+        </Link>
       </Title>
       <SemRegistros>
         <p>Não há registros de entrada ou saída</p>
@@ -37,7 +38,6 @@ const ConteinerHome = styled.div`
   align-items: flex-start;
   gap: 13px;
   margin: auto;
-
 `;
 
 const Title = styled.div`

@@ -1,25 +1,25 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import styled from "styled-components"
+import styled from "styled-components";
 import { buttonColor } from "../constants/colors";
 import Logo from "../assets/MyWallet.png";
 import { ThreeDots } from "react-loader-spinner";
 
 export default function SignUp() {
-    const navigate = useNavigate();
-    const [loading, setloading] = useState(false);
-    const [email, setEmail] = useState("");
-    const [senha, setSenha] = useState("");
-    const [nome, setNome] = useState("");
-    const [senha2, setSenha2] = useState("");
+  const navigate = useNavigate();
+  const [loading, setloading] = useState(false);
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
+  const [nome, setNome] = useState("");
+  const [senha2, setSenha2] = useState("");
 
-    function cadastrar(event) {
-        event.preventDefault()
-        setloading(true)
-    }
+  function cadastrar(event) {
+    event.preventDefault();
+    setloading(true);
+  }
 
-    return (
-        <>
+  return (
+    <>
       <Form onSubmit={cadastrar}>
         <img src={Logo} alt="logo" />
         <input
@@ -29,7 +29,7 @@ export default function SignUp() {
           onChange={(e) => setNome(e.target.value)}
           value={nome}
           disabled={loading}
-        //   required
+          //   required
         />
         <input
           id="login"
@@ -38,7 +38,7 @@ export default function SignUp() {
           onChange={(e) => setEmail(e.target.value)}
           value={email}
           disabled={loading}
-        //   required
+          //   required
         />
         <input
           id="password"
@@ -47,7 +47,7 @@ export default function SignUp() {
           onChange={(e) => setSenha(e.target.value)}
           value={senha}
           disabled={loading}
-        //   required
+          //   required
         />
 
         <input
@@ -57,7 +57,7 @@ export default function SignUp() {
           onChange={(e) => setSenha2(e.target.value)}
           value={senha2}
           disabled={loading}
-        //   required
+          //   required
         />
 
         <button type="submit" disabled={loading}>
@@ -78,11 +78,13 @@ export default function SignUp() {
         </button>
 
         <Link to="/">
-          <p href="">Já tem uma conta? <span>Entre agora!</span></p>
+          <p href="">
+            Já tem uma conta? <span>Entre agora!</span>
+          </p>
         </Link>
       </Form>
     </>
-    )
+  );
 }
 
 const Form = styled.form`
@@ -108,8 +110,8 @@ const Form = styled.form`
     border-radius: 5px;
     margin-bottom: 15px;
     box-shadow: 0 9px 10px -6px black;
-    &:hover{
-        cursor: pointer;
+    &:hover {
+      cursor: pointer;
     }
   }
   p {

@@ -14,7 +14,7 @@ export default function Login() {
   function logar(event) {
     event.preventDefault();
     setloading(true);
-    navigate("/home")
+    navigate("/home");
   }
 
   return (
@@ -90,8 +90,8 @@ const Form = styled.form`
     border-radius: 5px;
     margin-bottom: 15px;
     box-shadow: 0 9px 10px -6px black;
-    &:hover{
-        cursor: pointer;
+    &:hover {
+      cursor: pointer;
     }
   }
   p {

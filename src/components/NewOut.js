@@ -2,14 +2,15 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { buttonColor } from "../constants/colors";
 
-
 export default function NewOut() {
   return (
     <Form>
       <h2>Nova saída</h2>
       <input type="number" name="" id="" placeholder="Valor" />
       <input type="text" name="" id="" placeholder="Descrição" />
-      <Link to="/home"><button>Salvar saida</button></Link>
+      <Link to="/home">
+        <button>Salvar saida</button>
+      </Link>
     </Form>
   );
 }
