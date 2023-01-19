@@ -1,6 +1,9 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import styled from "styled-components";
+import Home from "./components/Home";
 import Login from "./components/Login";
+import NewIn from "./components/NewIn";
+import NewOut from "./components/NewOut";
 import SignUp from "./components/SignUp";
 import { backgroundColor } from "./constants/colors";
 
@@ -11,9 +14,9 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/cadastro" element={<SignUp />} />
-          <Route path="/home" element />
-          <Route path="/nova-entrada" element />
-          <Route path="/nova-saida" element />
+          <Route path="/home" element={<Home />} />
+          <Route path="/nova-entrada" element={<NewIn />} />
+          <Route path="/nova-saida" element={<NewOut />} />
         </Routes>
       </BrowserRouter>
     </ContainerApp>
