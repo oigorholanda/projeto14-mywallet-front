@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
 html, body, div, span, applet, object, iframe,
@@ -49,18 +49,19 @@ table {
 }
 input {
     width: 100%;
-    height: 50px;
+    height: 60px;
+	font-size: 20px;
     background: #ffffff;
+	border: none;
     border-radius: 5px;
-    &::placeholder {
-      font-size: 16px;
-      color: #000000;
-    }
+	box-shadow: 0 7px 5px -6px black;
+	padding: 15px;
+    color: #000000;
 }
 a {
 	text-decoration: none;
 	color: inherit;
 }
-`
+`;
 
-export default GlobalStyle
+export default GlobalStyle;

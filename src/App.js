@@ -1,7 +1,8 @@
-import styled from "styled-components";
-
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import styled from "styled-components";
 import Login from "./components/Login";
+import SignUp from "./components/SignUp";
+import { backgroundColor } from "./constants/colors";
 
 export default function App() {
   return (
@@ -9,7 +10,7 @@ export default function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Login />} />
-          <Route path="/cadastro" element />
+          <Route path="/cadastro" element={<SignUp />} />
           <Route path="/home" element />
           <Route path="/nova-entrada" element />
           <Route path="/nova-saida" element />
@@ -20,8 +21,10 @@ export default function App() {
 }
 
 const ContainerApp = styled.div`
-  background-color: purple;
-  max-width: 375px;
+  background-color: ${backgroundColor};
+  width: 100vw;
+  min-width: 375px;
+  height: 100vh;
   margin: auto;
   padding: 25px;
 `;

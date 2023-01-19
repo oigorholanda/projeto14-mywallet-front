@@ -1,33 +1,44 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import styled from "styled-components";
+import styled from "styled-components"
+import { buttonColor } from "../constants/colors";
 import Logo from "../assets/MyWallet.png";
 import { ThreeDots } from "react-loader-spinner";
-import { buttonColor } from "../constants/colors";
 
-export default function Login() {
-  const navigate = useNavigate();
-  const [loading, setloading] = useState(false);
-  const [email, setEmail] = useState("");
-  const [senha, setSenha] = useState("");
+export default function SignUp() {
+    const navigate = useNavigate();
+    const [loading, setloading] = useState(false);
+    const [email, setEmail] = useState("");
+    const [senha, setSenha] = useState("");
+    const [nome, setNome] = useState("");
+    const [senha2, setSenha2] = useState("");
 
-  function logar(event) {
-    event.preventDefault();
-    setloading(true);
-  }
+    function cadastrar(event) {
+        event.preventDefault()
+        setloading(true)
+    }
 
-  return (
-    <>
-      <Form onSubmit={logar}>
-        <img src={Logo} alt="logo MyWallet" />
+    return (
+        <>
+      <Form onSubmit={cadastrar}>
+        <img src={Logo} alt="logo" />
+        <input
+          id="name"
+          type="text"
+          placeholder="Nome"
+          onChange={(e) => setNome(e.target.value)}
+          value={nome}
+          disabled={loading}
+        //   required
+        />
         <input
           id="login"
           type="email"
-          placeholder="E-mail"
+          placeholder="Email"
           onChange={(e) => setEmail(e.target.value)}
           value={email}
           disabled={loading}
-          //   required
+        //   required
         />
         <input
           id="password"
@@ -36,12 +47,22 @@ export default function Login() {
           onChange={(e) => setSenha(e.target.value)}
           value={senha}
           disabled={loading}
-          //   required
+        //   required
+        />
+
+        <input
+          id="password2"
+          type="password"
+          placeholder="Confirme a senha"
+          onChange={(e) => setSenha2(e.target.value)}
+          value={senha2}
+          disabled={loading}
+        //   required
         />
 
         <button type="submit" disabled={loading}>
           {!loading ? (
-            "Entrar"
+            "Cadastrar"
           ) : (
             <ThreeDots
               height="80"
@@ -56,14 +77,12 @@ export default function Login() {
           )}
         </button>
 
-        <Link to="/cadastro">
-          <p href="">
-            Primeira vez? <span>Cadastre-se!</span>
-          </p>
+        <Link to="/">
+          <p href="">Já tem uma conta? <span>Entre agora!</span></p>
         </Link>
       </Form>
     </>
-  );
+    )
 }
 
 const Form = styled.form`
@@ -72,7 +91,7 @@ const Form = styled.form`
   flex-direction: column;
   align-items: center;
   gap: 13px;
-  margin: 120px auto;
+  margin: 75px auto;
   img {
     margin-bottom: 30px;
   }
@@ -91,7 +110,6 @@ const Form = styled.form`
     box-shadow: 0 9px 10px -6px black;
     &:hover{
         cursor: pointer;
-        
     }
   }
   p {
