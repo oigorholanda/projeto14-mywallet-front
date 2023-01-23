@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { buttonColor } from "../constants/colors";
 import Logo from "../assets/MyWallet.png";
 import { ThreeDots } from "react-loader-spinner";
+import axios from "axios";
 
 export default function SignUp() {
   const navigate = useNavigate();
@@ -13,9 +14,24 @@ export default function SignUp() {
   const [nome, setNome] = useState("");
   const [senha2, setSenha2] = useState("");
 
-  function cadastrar(event) {
-    event.preventDefault();
+  async function cadastrar(e) {
+    e.preventDefault();
     setloading(true);
+
+    try {
+      await axios.post(`procces.env${REACT_APP_API_URL}/`, {
+        email,
+        name: nome,
+        password: senha,
+        confirmPassword: senha2,
+      });
+      alert("Cadastro efetuado com sucesso! Realize o Login");
+      navigate("/");
+    } catch (err) {
+      alert(err.response.data.message);
+      console.log(err.response);
+      setloading(false);
+    }
   }
 
   return (
@@ -29,7 +45,7 @@ export default function SignUp() {
           onChange={(e) => setNome(e.target.value)}
           value={nome}
           disabled={loading}
-          //   required
+          required
         />
         <input
           id="login"
@@ -38,7 +54,7 @@ export default function SignUp() {
           onChange={(e) => setEmail(e.target.value)}
           value={email}
           disabled={loading}
-          //   required
+          required
         />
         <input
           id="password"
@@ -47,7 +63,7 @@ export default function SignUp() {
           onChange={(e) => setSenha(e.target.value)}
           value={senha}
           disabled={loading}
-          //   required
+          required
         />
 
         <input
@@ -57,7 +73,7 @@ export default function SignUp() {
           onChange={(e) => setSenha2(e.target.value)}
           value={senha2}
           disabled={loading}
-          //   required
+          required
         />
 
         <button type="submit" disabled={loading}>

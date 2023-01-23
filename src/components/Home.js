@@ -73,7 +73,7 @@ const SemRegistros = styled.div`
 
 const Botoes = styled.div`
   width: 100%;
-  max-width: 400px;
+  max-width: 450px;
   margin: auto;
   display: flex;
   justify-content: space-between;
