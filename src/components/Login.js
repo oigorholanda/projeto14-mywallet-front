@@ -1,20 +1,42 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Logo from "../assets/MyWallet.png";
 import { ThreeDots } from "react-loader-spinner";
 import { buttonColor } from "../constants/colors";
+import axios from "axios";
+import AuthContext from "../contexts/AuthContext";
+import UserContext from "../contexts/UserContext";
 
 export default function Login() {
   const navigate = useNavigate();
   const [loading, setloading] = useState(false);
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
+  const { setToken } = useContext(AuthContext);
+  const { setUser } = useContext(UserContext);
 
-  function logar(event) {
+  async function logar(event) {
     event.preventDefault();
     setloading(true);
-    navigate("/home");
+
+    axios
+      .post(`${process.env.REACT_APP_API_URL}/login`, {
+        email,
+        password: senha,
+      })
+      .then((res) => {
+        console.log(res.data);
+        setUser(res.data.user);
+        setToken(res.data.token);
+        navigate("/home");
+      })
+
+      .catch((err) => {
+        alert(err.response.data);
+        console.log(err.response);
+        setloading(false);
+      });
   }
 
   return (
@@ -28,7 +50,7 @@ export default function Login() {
           onChange={(e) => setEmail(e.target.value)}
           value={email}
           disabled={loading}
-          //   required
+          required
         />
         <input
           id="password"
@@ -37,7 +59,7 @@ export default function Login() {
           onChange={(e) => setSenha(e.target.value)}
           value={senha}
           disabled={loading}
-          //   required
+          required
         />
 
         <button type="submit" disabled={loading}>
@@ -58,7 +80,7 @@ export default function Login() {
         </button>
 
         <Link to="/cadastro">
-          <p href="">
+          <p>
             Primeira vez? <span>Cadastre-se!</span>
           </p>
         </Link>

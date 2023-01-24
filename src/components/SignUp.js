@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { buttonColor } from "../constants/colors";
@@ -19,7 +19,7 @@ export default function SignUp() {
     setloading(true);
 
     try {
-      await axios.post(`procces.env${REACT_APP_API_URL}/`, {
+      await axios.post(`${process.env.REACT_APP_API_URL}/sign-up`, {
         email,
         name: nome,
         password: senha,
@@ -28,7 +28,7 @@ export default function SignUp() {
       alert("Cadastro efetuado com sucesso! Realize o Login");
       navigate("/");
     } catch (err) {
-      alert(err.response.data.message);
+      alert(err.response.data);
       console.log(err.response);
       setloading(false);
     }
@@ -94,7 +94,7 @@ export default function SignUp() {
         </button>
 
         <Link to="/">
-          <p href="">
+          <p>
             Já tem uma conta? <span>Entre agora!</span>
           </p>
         </Link>

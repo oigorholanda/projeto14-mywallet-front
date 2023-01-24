@@ -1,16 +1,67 @@
-import { Link } from "react-router-dom";
+import axios from "axios";
+import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { buttonColor } from "../constants/colors";
+import AuthContext from "../contexts/AuthContext";
 
 export default function NewIn() {
+  const [form, setForm] = useState({});
+  const navigate = useNavigate();
+  const { token } = useContext(AuthContext);
+
+  function handleForm({ value, name }) {
+    setForm({
+      ...form,
+      [name]: value,
+    });
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    axios
+      .post(`${process.env.REACT_APP_API_URL}/registries/in`, form, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => {
+        console.log(res.data);
+        navigate("/home");
+      })
+
+      .catch((err) => {
+        alert(err.response.data);
+        console.log(err.response);
+      });
+  }
+
   return (
     <Form>
-      <h2>Nova entrada</h2>
-      <input type="number" name="" id="" placeholder="Valor" />
-      <input type="text" name="" id="" placeholder="Descrição" />
-      <Link to="/home">
-        <button>Salvar entrada</button>
-      </Link>
+      <h2>Nova Entrada</h2>
+      <input
+        type="number"
+        name="value"
+        placeholder="Valor"
+        onChange={(e) =>
+          handleForm({
+            name: e.target.name,
+            value: e.target.value,
+          })
+        }
+      />
+      <input
+        type="text"
+        name="description"
+        placeholder="Descrição"
+        onChange={(e) =>
+          handleForm({
+            name: e.target.name,
+            value: e.target.value,
+          })
+        }
+      />
+
+      <button onClick={handleSubmit}>Salvar entrada</button>
     </Form>
   );
 }
